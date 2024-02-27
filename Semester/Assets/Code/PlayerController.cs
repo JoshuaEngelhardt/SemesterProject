@@ -83,10 +83,10 @@ namespace Puzzle
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray)
             {
-                print(collider.name);
+                //print(collider.name);
                 if (collider.GetComponent<Door>())
                 {
-                    print("I found the door");
+                    //print("I found the door");
                     Door targetdoor = collider.GetComponent<Door>();
                     if (targetdoor.GetPassword() == "Room")
                     { 
@@ -106,13 +106,13 @@ namespace Puzzle
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray)
             {
-                print(collider.name);
+                //print(collider.name);
                 if (collider.GetComponent<AppearableObject>())
                 {
-                    print("I found the closet");
+                    //print("I found the closet");
                     AppearableObject targetObject = collider.GetComponent<AppearableObject>();
                     targetObject.Appear();
-                
+                    VoiceUI.instance.Worked();
                     
                 }
             }
@@ -124,12 +124,13 @@ namespace Puzzle
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
             foreach (Collider collider in colliderArray)
             {
-                print(collider.name);
+                //print(collider.name);
                 if (collider.GetComponent<AppearableObject>())
                 {
-                    print("I found the door");
+                    //print("I found the door");
                     AppearableObject targetObject = collider.GetComponent<AppearableObject>();
                     targetObject.Disappear();
+                    VoiceUI.instance.Worked();
                 }
             }
         }
