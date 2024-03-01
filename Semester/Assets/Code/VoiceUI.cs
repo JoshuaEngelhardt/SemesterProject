@@ -9,16 +9,17 @@ namespace Puzzle
     public class VoiceUI : MonoBehaviour
     {
         public static VoiceUI instance;
-        private Image image;
+        private Image normalState;
+        private Image workingState;
 
         private void Start()
         {
             instance = this;
-            image = GetComponent<Image>();
         }
         public void Worked()
         {
-            //image.color = Color.green;     
+            //normalState.gameObject.SetActive(false);
+            //workingState.gameObject.SetActive(true);
             print("I did work!");
         }
 
@@ -26,7 +27,7 @@ namespace Puzzle
 
         public void Failed()
         {
-            image.color = Color.red;
+            
         }
     }
 }

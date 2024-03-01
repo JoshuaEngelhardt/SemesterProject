@@ -23,7 +23,8 @@ namespace Puzzle
         private Rigidbody _rigidbody;
         private Vector3 originalGravity;
 
-        public Image uiImage;
+        public Image normalState;
+        public Image workingState;
 
         void Start()
         {
@@ -52,7 +53,7 @@ namespace Puzzle
         {
             Debug.Log("Keyword: " + args.text);
             keywordActions[args.text].Invoke();
-        }
+        } //Allows keywords to be recognized
 
         private void Awake()
         {
@@ -61,13 +62,14 @@ namespace Puzzle
 
         void Update()
         {
-            if (Input.GetKeyUp(KeyCode.E)) {
+            if (Input.GetKeyUp(KeyCode.E))
+            {
                 Mouse mouseInput = Mouse.current;
                 Vector2 mousePosition = mouseInput.position.ReadValue();
-
                 Ray ray = Camera.main.ScreenPointToRay(mousePosition);
                 RaycastHit hit;
-                if (Physics.Raycast(ray, out hit, 2f)) {
+                if (Physics.Raycast(ray, out hit, 2f))
+                {
                     NoteController targetNote = hit.transform.GetComponent<NoteController>();
                     if (targetNote)
                     {
@@ -75,7 +77,19 @@ namespace Puzzle
                     }
                 }
             }
+
         }
+
+        public void work()
+        {
+            normalState.gameObject.SetActive(false);
+            workingState.gameObject.SetActive(true);
+        } //Voice Tester UI changes to green
+        public void normal()
+        {
+            normalState.gameObject.SetActive(true);
+            workingState.gameObject.SetActive(false);
+        } //Voice Tester UI changes back to white
 
         private void DoorOpen()
         {
@@ -91,10 +105,14 @@ namespace Puzzle
                     if (targetdoor.GetPassword() == "Room")
                     { 
                         targetdoor.Interact();
+                        work();
+                        Invoke("normal", 1);
                     }
                     if(targetdoor.GetPassword() == "Vase")
                     {
                         targetdoor.Interact();
+                        work();
+                        Invoke("normal", 1);
                     }
                 }
             }
@@ -112,12 +130,12 @@ namespace Puzzle
                     //print("I found the closet");
                     AppearableObject targetObject = collider.GetComponent<AppearableObject>();
                     targetObject.Appear();
-                    VoiceUI.instance.Worked();
-                    
+                    work();
+                    Invoke("normal", 1);
                 }
             }
         }
-
+        
         private void Disappear()
         {
             float interactRange = 2f;
@@ -130,18 +148,20 @@ namespace Puzzle
                     //print("I found the door");
                     AppearableObject targetObject = collider.GetComponent<AppearableObject>();
                     targetObject.Disappear();
-                    VoiceUI.instance.Worked();
+                    work();
+                    Invoke("normal", 1);
                 }
             }
-        }
+        } //Object Disappear
 
         void FlipGravity()
         {
 
             isGravityFlipped = !isGravityFlipped;
+            work();
+            Invoke("normal", 1);
 
-
-            if(isGravityFlipped )
+            if (isGravityFlipped )
             {
                 _rigidbody.MoveRotation(Quaternion.Euler(180f, 0f, 0f));
                 Physics.gravity = new Vector3(0, -originalGravity.y, 0);
@@ -158,7 +178,7 @@ namespace Puzzle
                 GetComponent<FirstPersonController>()._verticalVelocity = 0;
             }
 
-        }
+        } //Flips Character Gravity
 
     }
 }
