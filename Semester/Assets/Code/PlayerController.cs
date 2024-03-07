@@ -26,6 +26,10 @@ namespace Puzzle
         public Image normalState;
         public Image workingState;
 
+        public Light followingLight;
+        public bool isLightOn = false;
+
+
         void Start()
         {
             _rigidbody = GetComponent<Rigidbody>();
@@ -40,6 +44,7 @@ namespace Puzzle
             keywordActions.Add("Appear", Appear);
             keywordActions.Add("Disappear", Disappear);
             keywordActions.Add("Flip", FlipGravity);
+            keywordActions.Add("Light", ChangeLight);
 
             keywordRecognizer = new KeywordRecognizer(keywordActions.Keys.ToArray());
             keywordRecognizer.OnPhraseRecognized += OnKeywordsRecognized;
@@ -167,6 +172,7 @@ namespace Puzzle
                 Physics.gravity = new Vector3(0, -originalGravity.y, 0);
                 GetComponent<FirstPersonController>().Gravity = 15;
                 GetComponent<FirstPersonController>()._verticalVelocity = 0;
+               
             }
             else
             {
@@ -180,5 +186,20 @@ namespace Puzzle
 
         } //Flips Character Gravity
 
+        void ChangeLight()
+        {
+            isLightOn = !isLightOn;
+            work();
+            Invoke("normal", 1);
+            if (isLightOn)
+            {
+                //followingLight.GetComponent<LightController>().TurnOn;
+                //GetComponent<LightController>().TurnOn;
+                followingLight.intensity = 5f;
+            }
+            else {
+                followingLight.intensity = 1f;
+            }
+        }
     }
 }
