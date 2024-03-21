@@ -41,7 +41,7 @@ namespace Puzzle
             keywordActions.Add("Doom", DoorOpen); //House 2 Password
 
             //Assigning Words to Functions
-            keywordActions.Add("Appear", Appear);
+            //keywordActions.Add("Appear", Appear);
             keywordActions.Add("Disappear", Disappear);
             keywordActions.Add("Flip", FlipGravity);
             keywordActions.Add("Light", ChangeLight);
@@ -123,7 +123,7 @@ namespace Puzzle
             }
         }
 
-        private void Appear()
+        /*private void Appear()
         {
             float interactRange = 2f;
             Collider[] colliderArray = Physics.OverlapSphere(transform.position, interactRange);
@@ -139,7 +139,7 @@ namespace Puzzle
                     Invoke("normal", 1);
                 }
             }
-        }
+        }*/
         
         private void Disappear()
         {
