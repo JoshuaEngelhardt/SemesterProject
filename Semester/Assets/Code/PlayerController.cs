@@ -35,6 +35,8 @@ namespace Puzzle
             _rigidbody = GetComponent<Rigidbody>();
             originalGravity = Physics.gravity;
 
+            keywordActions.Add("Test", Test);
+
             //Associates Words as Passwords
             keywordActions.Add("Room", DoorOpen); //Tutorial House Password
             keywordActions.Add("Vase", DoorOpen); //House 1 Password
@@ -200,6 +202,12 @@ namespace Puzzle
             else {
                 followingLight.intensity = 1f;
             }
+        }
+
+        void Test()
+        {
+            work();
+            Invoke("normal", 1);
         }
     }
 }

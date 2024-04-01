@@ -24,7 +24,7 @@ namespace Puzzle
         public void Disappear()
         {
             _rigidBody.DOMove(transform.position + new Vector3(0, 5, 0), 1);
-            //Invoke("Gone", 1);
+            Invoke("Gone", 1.5f);
             //objectRenderer.enabled = false;
             //objectCollider.enabled = false;
         }

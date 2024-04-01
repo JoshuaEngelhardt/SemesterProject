@@ -17,6 +17,7 @@ namespace Puzzle
                 if (plate.GetComponent<PressurePlate>().inUse == false)
                 {
                     truePlates.Add(plate);
+                 
                 }
             }
             if(truePlates.Count == currentPlates.Count)
