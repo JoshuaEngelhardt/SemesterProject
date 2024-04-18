@@ -40,7 +40,7 @@ namespace Puzzle
             //Associates Words as Passwords
             keywordActions.Add("Room", DoorOpen); //Tutorial House Password
             keywordActions.Add("Vase", DoorOpen); //House 1 Password
-            keywordActions.Add("Doom", DoorOpen); //House 2 Password
+            keywordActions.Add("Escape", DoorOpen); //House 2 Password
 
             //Assigning Words to Functions
             //keywordActions.Add("Appear", Appear);
@@ -116,6 +116,12 @@ namespace Puzzle
                         Invoke("normal", 1);
                     }
                     if(targetdoor.GetPassword() == "Vase")
+                    {
+                        targetdoor.Interact();
+                        work();
+                        Invoke("normal", 1);
+                    }
+                    if(targetdoor.GetPassword() == "Escape")
                     {
                         targetdoor.Interact();
                         work();
